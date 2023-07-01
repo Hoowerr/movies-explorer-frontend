@@ -7,23 +7,18 @@ const SearchForm = (props) => {
   const [query, setQuery] = useState(props.query);
   const [checkedState, setCheckedState] = useState(props.checkedState);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const hasQuery = query.trim() !== '';
-    props.setQueryError(!hasQuery);
-    props.onUpdateSearch(query, checkedState, location);
-  };
-
   const handleSearchChange = (e) => {
     setQuery(e.target.value);
+    props.onUpdateSearch(e.target.value, checkedState, location);
   };
 
   const handleSearchChangeShort = () => {
     setCheckedState((prevState) => !prevState);
+    props.onUpdateSearch(query, !checkedState, location);
   };
 
   return (
-    <form className='searchForm' onSubmit={handleSubmit}>
+    <form className='searchForm'>
       <div className='searchForm__search'>
         <input
           placeholder='Фильм'

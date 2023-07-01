@@ -78,6 +78,7 @@
   .movie__container {
     width: 708px;
     height: 134px;
+    margin: 0 auto;
   }
 
   .movie-card__image {
@@ -94,10 +95,12 @@
 
 @media screen and (max-width: 767px) and (min-width: 320px) {
   .movie__container {
+    max-width: 300px;
     background: #2f2f2f;
-    display: flex;
-    justify-content: space-between;
+    /* display: flex; */
+    /* justify-content: space-between; */
     flex-direction: column-reverse;
+    margin: auto;
   }
 
   .movie-card__caption {

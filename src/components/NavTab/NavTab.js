@@ -1,17 +1,19 @@
 import './NavTab.css';
+import { Link } from 'react-scroll';
 
 const NavTab = () => {
   return (
     <div className='navtab'>
-      <a className='navtab__link' href='#aboutProject '>
+      <Link
+        to='aboutProject' className='navtab__link'smooth={true} duration={600}>
         О проекте
-      </a>
-      <a className='navtab__link' href='#tech'>
+      </Link>
+      <Link to='techs' className='navtab__link' smooth={true} duration={600}>
         Технологии
-      </a>
-      <a className='navtab__link' href='#student'>
+      </Link>
+      <Link to='aboutMe' className='navtab__link' smooth={true} duration={600}>
         Студент
-      </a>
+      </Link>
     </div>
   );
 };
