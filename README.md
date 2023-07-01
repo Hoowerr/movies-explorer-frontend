@@ -6,6 +6,8 @@
 
 ## Пулл реквест:
 
+https://github.com/Hoowerr/movies-explorer-frontend/pull/2
+
 ## Ccылка на проекта и IP:
 
 https://movies-explorer.hoower.nomoredomains.rocks
