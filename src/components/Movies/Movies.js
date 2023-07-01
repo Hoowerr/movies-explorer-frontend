@@ -1,17 +1,30 @@
-import { movies } from '../../utils/movies';
-import Preloader from '../Preloader/Preloader';
+import React, { useState } from 'react';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import './Movies.css';
 
-const Movies = () => {
-  const showButton = true;
+const Movies = (props) => {
+  const [queryError, setQueryError] = useState(true);
+
   return (
     <div>
-      <SearchForm />
-      <Preloader />
-      <MoviesCardList cards={movies} showButton={showButton} />
+      <SearchForm
+        checkedState={props.checkedState}
+        setQueryError={setQueryError}
+        onUpdateSearch={props.onUpdateSearch}
+        query={props.query}
+      />
+      <MoviesCardList
+        savedMovies={props.savedMovies}
+        onSaveCard={props.onSaveCard}
+        searchedMoviesError={props.searchedMoviesError}
+        cards={props.searchedMovies}
+        preloader={props.preloader}
+        queryError={queryError}
+        onDeleteCard={props.onDeleteCard}
+      />
     </div>
   );
 };
+
 export default Movies;
