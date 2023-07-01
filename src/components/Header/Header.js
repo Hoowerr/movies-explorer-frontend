@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import './Header.css';
 import Navigation from '../Navigation/Navigation';
 import logo from '../../images/headerLogo.svg';
@@ -9,6 +9,9 @@ import menu from '../../images/headerBurger.svg';
 const Header = (props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+
+  const setActive = ({ isActive }) =>
+    isActive ? 'header__Button-active' : 'header__Button';
 
   const openMenu = () => {
     setIsMenuOpen(true);
@@ -35,12 +38,12 @@ const Header = (props) => {
     return (
       <nav className='header__navBlock'>
         <div className='header__navBlock_films'>
-          <Link className='header__films link' to='/movies'>
+          <NavLink className={setActive} to='/movies'>
             Фильмы
-          </Link>
-          <Link className='header__saved-films link' to='/saved-movies'>
+          </NavLink>
+          <NavLink className={setActive} to='/saved-movies'>
             Сохраненные фильмы
-          </Link>
+          </NavLink>
         </div>
         <Link className='header__profile link' to='/profile'>
           Аккаунт
