@@ -19,7 +19,7 @@ const SavedMovies = (props) => {
         searchedMoviesError={props.searchedMoviesError}
         onDeleteCard={props.onDeleteCard}
         savedMovies={props.savedMovies}
-        cards={props.savedMovies}
+        cards={props.searchedMovies}
       />
     </div>
   );

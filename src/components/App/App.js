@@ -56,6 +56,10 @@ const App = () => {
   const [checkedState, setCheckedState] = useState(false);
   const [isSuccessful, setIsSuccessful] = useState(false);
 
+  useEffect(() => {
+    localStorage.setItem('checkedState', JSON.stringify(checkedState));
+  }, [checkedState]);
+
   const closeAllPopups = () => {
     setErrorTooltipPopup('');
   };
@@ -264,70 +268,53 @@ const App = () => {
   }
 
   function handleUpdateSearch(search, checkedState, location) {
-    setPreloader(true);
-    setTimeout(() => {
-      if (search !== '') {
-        if (location === '/movies') {
-          const searchMovies = movies.filter(
-            (el) => el.nameRU.toLowerCase().indexOf(search.toLowerCase()) !== -1
-          );
-          setPreloader(false);
-          setFilteredMovies(searchMovies);
-          localStorage.setItem('filteredMovies', JSON.stringify(searchMovies));
-          localStorage.setItem('query', JSON.stringify(search));
-          checkQueryShort(checkedState, searchMovies, location);
-        } else if (location === '/saved-movies') {
-          setPreloader(false);
-          const cards = filterSavedCards();
-          const searchMovies = cards.filter(
-            (el) => el.nameRU.toLowerCase().indexOf(search.toLowerCase()) !== -1
-          );
-          setFilteredSavedMovies(searchMovies);
-          checkQueryShort(checkedState, searchMovies, location);
-        }
-      } else {
-        if (location === '/movies') {
-          setPreloader(false);
-          setFilteredMovies([]);
-          localStorage.setItem('filteredMovies', JSON.stringify([]));
-          localStorage.setItem('query', JSON.stringify(search));
-        } else if (location === '/saved-movies') {
-          const cards = filterSavedCards();
-          setPreloader(false);
-          setFilteredSavedMovies(cards);
-          checkQueryShort(checkedState, filteredSavedMovies, location);
-        }
+    setCheckedState(checkedState);
+    if (search !== '') {
+      if (location === '/movies') {
+        const searchMovies = movies.filter(
+          (el) =>
+            el.nameRU.toLowerCase().indexOf(search.toLowerCase()) !== -1 &&
+            filterShortMovie(el, checkedState)
+        );
+        setFilteredMovies(searchMovies);
+        localStorage.setItem('filteredMovies', JSON.stringify(searchMovies));
+        localStorage.setItem('query', JSON.stringify(search));
+      } else if (location === '/saved-movies') {
+        const cards = filterSavedCards(checkedState);
+        const searchMovies = cards.filter(
+          (el) => el.nameRU.toLowerCase().indexOf(search.toLowerCase()) !== -1
+        );
+        setFilteredSavedMovies(searchMovies);
       }
-    }, 500);
+    } else {
+      if (location === '/movies') {
+        setFilteredMovies([]);
+        localStorage.setItem('filteredMovies', JSON.stringify([]));
+        localStorage.setItem('query', JSON.stringify(search));
+      } else if (location === '/saved-movies') {
+        const cards = filterSavedCards(checkedState);
+        setFilteredSavedMovies(cards);
+      }
+    }
   }
 
-  function filterSavedCards() {
+  function filterShortMovie(movie, checkedState) {
+    return movie.duration < shortFilmTiming || !checkedState;
+  }
+
+  function filterSavedCards(isShort = checkedState) {
     const cards = movies
       .map((c) => {
         const [cards_filtered] = savedMovies.filter(
-          (m) => c.id === m.movieId && m.owner === currentUser._id
+          (m) =>
+            c.id === m.movieId &&
+            m.owner._id === currentUser._id &&
+            (m.duration < shortFilmTiming || !isShort)
         );
         return cards_filtered;
       })
       .filter((card) => card !== undefined);
     return cards;
-  }
-
-  function checkQueryShort(checkedState, searchMovies, location) {
-    if (checkedState) {
-      const queryShort = searchMovies.filter(
-        (el) => el.duration < shortFilmTiming
-      );
-      if (location === '/movies') {
-        setFilteredMovies(queryShort);
-        localStorage.setItem('filteredMovies', JSON.stringify(queryShort));
-        localStorage.setItem('checkedState', JSON.stringify(true));
-      } else if (location === '/saved-movies') {
-        setFilteredSavedMovies(queryShort);
-      }
-    } else {
-      localStorage.setItem('checkedState', JSON.stringify(false));
-    }
   }
 
   function handleSaveCard(card) {
