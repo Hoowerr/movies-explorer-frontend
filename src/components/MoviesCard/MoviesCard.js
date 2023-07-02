@@ -8,19 +8,17 @@ const MoviesCard = (props) => {
   const currentUser = useContext(CurrentUserContext);
   const { card, savedMovies, onSaveCard, onDeleteCard } = props;
   const location = useLocation().pathname;
-  const savedMovie = savedMovies.find(
+  const isSaved = savedMovies.find(
     (id) => id.movieId === card.id && id.owner._id === currentUser._id
   );
-  const [isSaved, setIsSaved] = React.useState(!!savedMovie);
 
-  const handleClick = () => {
-    setIsSaved((prevState) => !prevState);
+  function handleClick() {
     onSaveCard(card);
-  };
+  }
 
-  const handleDeleteCard = () => {
+  function handleDeleteCard() {
     onDeleteCard(card);
-  };
+  }
 
   return (
     <div className='movie__container'>
