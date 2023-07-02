@@ -85,6 +85,7 @@ class Api {
 }
 export const api = new Api({
   url: 'https://api.movies.hoower.nomoredomains.rocks',
+  // url: 'http://localhost:3001',
 });
 
 export default api;

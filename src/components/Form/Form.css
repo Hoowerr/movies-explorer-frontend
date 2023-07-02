@@ -117,6 +117,9 @@
   .form {
     padding: 232px 0;
   }
+  .form__error {
+    width: 400px;
+  }
 }
 
 @media screen and (max-width: 767px) and (min-width: 320px) {
@@ -154,5 +157,8 @@
     line-height: 15px;
     font-size: 12px;
     font-weight: 400;
+  }
+  .form__error {
+    width: 250px;
   }
 }

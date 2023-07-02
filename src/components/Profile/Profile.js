@@ -14,7 +14,10 @@ const Profile = (props) => {
     resetForm();
     props.setApiSuccess(false);
     props.setApiError('');
-  }, [resetForm]);
+  }, [currentUser, resetForm]);
+
+  const isNewData =
+    values.name !== currentUser.name || values.email !== currentUser.email;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -84,9 +87,9 @@ const Profile = (props) => {
         type='submit'
         onClick={handleSubmit}
         className={`profile__button ${
-          isFormInvalid ? 'profile__button_disabled' : ''
+          isFormInvalid & isNewData ? 'profile__button_disabled' : ''
         }`}
-        disabled={isFormInvalid}
+        disabled={isFormInvalid || !isNewData}
       >
         Редактировать
       </button>

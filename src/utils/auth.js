@@ -1,4 +1,5 @@
 export const BASE_URL = 'https://api.movies.hoower.nomoredomains.rocks';
+// export const BASE_URL = 'http://localhost:3001';
 
 export const response = (res) =>
   res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
@@ -6,6 +7,7 @@ export const response = (res) =>
 export const getContent = (token) => {
   return fetch(`${BASE_URL}/users/me`, {
     method: 'GET',
+    credentials: 'include',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
@@ -17,6 +19,7 @@ export const getContent = (token) => {
 export const register = (userData) => {
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
+    credentials: 'include',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
@@ -32,6 +35,7 @@ export const register = (userData) => {
 export const authorize = (userData) => {
   return fetch(`${BASE_URL}/signin`, {
     method: 'POST',
+    credentials: 'include',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
