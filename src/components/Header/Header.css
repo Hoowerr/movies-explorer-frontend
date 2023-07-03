@@ -1,0 +1,188 @@
+.header {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 16px 70px;
+}
+
+.header__homeLink {
+  transition: opacity 0.5s linear;
+}
+
+.header__homeLink:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.header__logo {
+  width: 38px;
+}
+
+.header__signBlock {
+  width: 183px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header__navBlock {
+  display: flex;
+  justify-content: space-between;
+  width: calc(100% - 38px);
+}
+
+.header__navBlock_films {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-left: 44px;
+}
+
+.header__register {
+  text-decoration: none;
+  color: #ffffff;
+  transition: opacity 0.5s linear;
+}
+
+.header__register:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.header__login {
+  max-width: 70px;
+  background: #3ddc84;
+  color: #000000;
+  transition: opacity 0.5s linear;
+  border-radius: 3px;
+  text-decoration: none;
+  padding: 8px 20px;
+}
+
+.header__Button {
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 18px;
+  text-decoration: none;
+}
+.header__Button-active {
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 18px;
+  text-decoration: none;
+}
+
+.header__Button:hover {
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.header__Button:hover {
+  transition: opacity 0.5s linear;
+}
+.header__Button-active:hover {
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.header__Button-active:hover {
+  transition: opacity 0.5s linear;
+}
+
+.header__profile {
+  display: flex;
+  gap: 17px;
+  align-items: center;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+  text-decoration: none;
+}
+
+.header__user {
+  background: #313131;
+  height: 14px;
+  width: 11.5px;
+  border-radius: 4px;
+  padding: 8px;
+}
+
+.header__login:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.header__menu {
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  display: none;
+  border: none;
+  padding: 0;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .header {
+    padding: 15px 30px;
+  }
+
+  .header__navBlock_films {
+    display: none;
+  }
+
+  .header__profile {
+    display: none;
+  }
+
+  .header__menu {
+    display: block;
+  }
+
+  .header__navBlock {
+    justify-content: end;
+  }
+}
+
+@media screen and (max-width: 767px) and (min-width: 320px) {
+  .header {
+    padding: 17px 18px;
+  }
+
+  .header__signBlock {
+    width: 132px;
+    font-size: 10px;
+  }
+
+  .header__login {
+    padding: 5px 12px;
+  }
+
+  .header__navBlock_films {
+    display: none;
+  }
+
+  .header__profile {
+    display: none;
+  }
+
+  .header__menu {
+    display: block;
+  }
+
+  .header__navBlock {
+    justify-content: end;
+  }
+
+  .header__menu {
+    height: 43px;
+    width: 40px;
+  }
+}
