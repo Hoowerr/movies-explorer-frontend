@@ -12,7 +12,7 @@ const SearchForm = (props) => {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    props.onUpdateSearch(query, checkedState, location);
+    props.onUpdateSearch(query, props.checkedState, location);
   };
 
   const handleSearchChangeShort = () => {
