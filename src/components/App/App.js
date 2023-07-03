@@ -56,10 +56,6 @@ const App = () => {
   const [checkedState, setCheckedState] = useState(false);
   const [isSuccessful, setIsSuccessful] = useState(false);
 
-  useEffect(() => {
-    localStorage.setItem('checkedState', JSON.stringify(checkedState));
-  }, [checkedState]);
-
   const closeAllPopups = () => {
     setErrorTooltipPopup('');
   };
@@ -97,6 +93,10 @@ const App = () => {
   }, []);
 
   useEffect(() => {
+    if (location === '/saved-movies') {
+      setCheckedState(false);
+      return;
+    }
     const checkedStateLocal = JSON.parse(
       localStorage.getItem('checkedState') || 'false'
     );
@@ -145,7 +145,7 @@ const App = () => {
 
   useEffect(() => {
     setFilteredSavedMovies(filterSavedCards());
-  }, [savedMovies]);
+  }, [savedMovies, checkedState]);
 
   useEffect(() => {
     if (loggedIn) {
@@ -269,6 +269,9 @@ const App = () => {
 
   function handleUpdateSearch(search, checkedState, location) {
     setCheckedState(checkedState);
+    if (location !== '/saved-movies') {
+      localStorage.setItem('checkedState', JSON.stringify(checkedState));
+    }
     if (search !== '') {
       if (location === '/movies') {
         const searchMovies = movies.filter(
@@ -447,7 +450,7 @@ const App = () => {
                   searchedMovies={filteredSavedMovies}
                   searchedMoviesError={searchedMoviesError}
                   loggedIn={loggedIn}
-                  checkedState={false}
+                  checkedState={checkedState}
                   onDeleteCard={handleDeleteCard}
                   onUpdateSearch={handleUpdateSearch}
                   preloader={preloader}

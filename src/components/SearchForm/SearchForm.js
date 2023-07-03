@@ -5,7 +5,6 @@ import './SearchForm.css';
 const SearchForm = (props) => {
   const location = useLocation().pathname;
   const [query, setQuery] = useState(props.query);
-  const [checkedState, setCheckedState] = useState(props.checkedState);
 
   const handleSearchChange = (e) => {
     setQuery(e.target.value);
@@ -17,9 +16,7 @@ const SearchForm = (props) => {
   };
 
   const handleSearchChangeShort = () => {
-    const newState = !checkedState;
-    setCheckedState(newState);
-    props.onUpdateSearch(query, newState, location);
+    props.onUpdateSearch(query, !props.checkedState, location);
   };
 
   return (
@@ -40,7 +37,7 @@ const SearchForm = (props) => {
         <label className='searchForm__checkbox'>
           <input
             className='searchForm__checkbox-input'
-            checked={checkedState}
+            checked={props.checkedState}
             onChange={handleSearchChangeShort}
             type='checkbox'
           />
